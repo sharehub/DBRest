@@ -1,4 +1,5 @@
 .*
 *.pyc
 *.pyo
+*.tgz
 db.sqlite3
