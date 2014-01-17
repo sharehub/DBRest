@@ -11,5 +11,5 @@ urlpatterns = patterns('',
 
     # url(r'^admin/', include(admin.site.urls)),
     url(r'^$', 'dbrest.views.home', name='home'),
-    url(r'^app/', include('contacts.urls')),
+    url(r'^contacts/', include('contacts.urls')),
 )

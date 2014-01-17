@@ -86,3 +86,4 @@ STATIC_URL = '/static/'
 PROFILE_CODE='sNW0myTiqnzUCcBD5drkeS4K2bRQxY9lHhJw8V3MjvXPIutagAE6ZOGLF1f7po'
 PROFILE_MULTI=[11,7]
 
+CONTACT_URL={'user':'user', 'strid':'strid', 'contact':'contact'}

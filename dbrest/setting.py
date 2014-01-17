@@ -23,7 +23,8 @@ def multigen():
 if __name__ == '__main__':
     # Yes, run as standalone
     print("# Custom setting")
-    print("PROFILE_CODE='"+string.join(codegen(), '')+"'")
+    # print("PROFILE_CODE='"+string.join(codegen(), '')+"'")
+    print("PROFILE_CODE='"+''.join(random.sample(IDCODE, len(IDCODE)))+"'")
     print("PROFILE_MULTI=["+','.join([str(i) for i in multigen()])+"]")
 
 #else:
