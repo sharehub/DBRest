@@ -1,18 +1,19 @@
-from django.views.generic.base import View
-from django.http import HttpResponse
 import uuid
 import string
 
+from django.views.generic.base import View
+from django.http import HttpResponse
+from django.conf import settings
+
 # code avaiable for USTRID
-IDCODE='aZbY9cXdW8eVfU7gThS6iRjQ5kPlO4mNnM3oLpK2qJrI1sHtG0uFvEwDxCyBzA'
-IDCODE_LEN=len(IDCODE)
+IDCODE_LEN=len(settings.PROFILE_CODE)
 
 class ProfileView(View):
     """
     Handler the contacts GET/PUT/POST/DELETE request
     """
     def get(self, request, *arg, **kwargs):
-        return HttpResponse("Hello Get Profile")
+        return HttpResponse("Hello Get Profile " + self.ustrid('testing'))
 
     def put(self, request, *arg, **kwargs):
         return HttpResponse("Hello Put Profile")
@@ -30,13 +31,13 @@ class ProfileView(View):
 
     def ustrid(self, uname):
         ustrid = []
-        uuids = string.join(str(uuid.uuid5(uuid.NAMESPACE_X500, uname)).split('-'), '')
+        uuids = ''.join(str(uuid.uuid5(uuid.NAMESPACE_X500, uname)).split('-'))
         str1, str2 = uuids[::2], uuids[1::2]
         for id in zip(str1, str2):
-            ustrid.append(IDCODE[(int(id[0], 16)*2+int(id[1], 16)*3)%IDCODE_LEN]) 
+            idx = int(id[0], 16)*settings.PROFILE_MULTI[0]+int(id[1], 16)*settings.PROFILE_MULTI[1]
+            ustrid.append(settings.PROFILE_CODE[idx%IDCODE_LEN])
 
-
-        return string.join(ustrid, '')
+        return ''.join(ustrid)
         
         
     # patch, head, option, trace are not support yet
