@@ -81,3 +81,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Custom settings
+PROFILE_CODE = 'sNW0myTiqnzUCcBD5drkeS4K2bRQxY9lHhJw8V3MjvXPIutagAE6ZOGLF1f7po'
+PROFILE_MULTI = [11,7]
+
+CONTACT_URL = {'user':'user', 'strid':'strid', 'contact':'contact', 'auth':'auth'}
+
+# CSRF Settings, if necessary
+# CSRF_COOKIE_NAME =  # default is 'csrftoken' 
+
+CSRF_COOKIE_DOMAIN = '.djan.cf'	# default is the HOSTNAME in REQ
+ 
