@@ -18,13 +18,26 @@ class ContactAPITestCase(TestCase):
         itest = User.objects.get(username='itest')
         itest.delete()
 
+    def test_register(self):
+        """
+        Test register user 'hahaha'
+          please note that: JSON only accept '"' as validate, "'" is not accepted
+          And, the server only accept 'raw-data' in PUT, so, you need to stringfy the JSON in ajax data field
+        """
+        r = Client().put('/contacts/api/auth', data={"username":"hahaha", "password":"hahaha", "email":"hahaha@hahaha.com"})
+        self.assertEqual(r.status_code, 200)
+
     def test_logout(self):
-        """ logout and redirect to '/'"""
+        """ 
+        logout and redirect to '/'
+        """
         r = Client().get('/contacts/api/auth')
         self.assertEqual(r.status_code, 302)
 
     def test_login(self):
-        """ login use  test password """
+        """ 
+        login use  test password 
+        """
         r = Client().post('/contacts/api/auth', {'username':r'itest', 'password':r'itest'})
         print(r.content)
         self.assertEqual(r.status_code, 200)
