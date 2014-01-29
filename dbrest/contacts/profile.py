@@ -1,6 +1,3 @@
-import uuid
-import string
-
 from django.views.generic.base import View
 from django.http import HttpResponse
 from django.conf import settings

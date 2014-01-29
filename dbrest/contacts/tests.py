@@ -4,6 +4,8 @@ from django.test.client import Client
 from django.contrib.auth.models import User
 from profile import ProfileView
 
+from models import Profile
+
 # Create your tests here.
 
 class ContactAPITestCase(TestCase):
@@ -26,6 +28,9 @@ class ContactAPITestCase(TestCase):
         """
         r = Client().put('/contacts/api/auth', data={"username":"hahaha", "password":"hahaha", "email":"hahaha@hahaha.com"})
         self.assertEqual(r.status_code, 200)
+        prof = Profile.objects.get(uid=User.objects.get(username='hahaha'))
+        self.assertTrue(prof is not None)
+        print(prof.ustrid)
 
     def test_logout(self):
         """ 

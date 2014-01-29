@@ -5,6 +5,7 @@ from django.shortcuts import redirect
 from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from models import Profile
 
 from tools import ToolKits
 
@@ -48,7 +49,12 @@ class Authenticate(View):
         if user is None:
             return HttpResponse("information not correctly!")
 
+        profile = Profile()
+        profile.uid = user
+        profile.ustrid = Profile.uusid(username)
+        
         user.save()
+        profile.save()
         login(request, authenticate(username=username, password=password))
         return HttpResponse("Hello, welcome "+username)
 

@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
@@ -16,7 +18,7 @@ class Profile(models.Model):
         return the uniq SN of user, uname should use ''.encode() to make it ascii 
         """
         ustrid = []
-        uuids = ''.join(str(uuid.uuid5(uuid.NAMESPACE_X500, uname)).split('-'))
+        uuids = ''.join(str(uuid.uuid5(uuid.NAMESPACE_X500, uname.encode())).split('-'))
         str1, str2 = uuids[::2], uuids[1::2]
         for id in zip(str1, str2):
             idx = int(id[0], 16)*settings.PROFILE_MULTI[0]+int(id[1], 16)*settings.PROFILE_MULTI[1]
